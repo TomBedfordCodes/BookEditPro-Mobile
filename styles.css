@@ -1,0 +1,27 @@
+
+ul {
+    list-style: none;
+}
+
+li {
+    color: black;
+}
+
+
+#projname-input {
+    display: block;
+    width: 80%;
+    max-width: 300px;
+    box-sizing: border-box;
+}
+
+#add-btn {
+    display: block;
+    width: 80%;
+    max-width: 300px;
+    padding: 10px;
+    box-sizing: border-box;
+
+}
+
+
