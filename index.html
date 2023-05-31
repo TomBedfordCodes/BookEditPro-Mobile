@@ -4,19 +4,23 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="IconMain.ico">
+
+    <!-- NOT SURE THIS ICON STUFF IS WORKING; MIGHT BE BETTER TO JUST USE FAVICON (ALSO SEE WEBMANIFEST) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="IconMain.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="IconMain.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="IconMain.ico">
+    <link rel="manifest" href="/site.webmanifest">
+
 </head>
 
 <body>
-    <h1>Projects</h1>
-    <ul id="projects-list">
-    </ul>
-    <input 
-        id="projname-input" 
-        type="text" 
-        placeholder="Draft project name"
-    >
-    <button id="add-btn">Add</button>
-
-    <script type="module" src="index.js"></script>
+    <div id="container">
+        <h1>Projects</h1>
+        <ul id="projects-list"></ul>
+        <ul id="app-added-projects-list"></ul>
+        <button id="new-proj-btn">Add new project</button>
+    </div>
 </body>
+<script type="module" src="index.js"></script>
 </html>

@@ -1,59 +1,74 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
-import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
+
+
+
+
+// HTML elements
+const newProjBtn = document.getElementById("new-proj-btn")
+const projectsListEl = document.getElementById("projects-list")
+const appAddedProjectsListEl = document.getElementById("app-added-projects-list")
+
+
+
+
+// firebase
 const appSettings = {
     databaseURL: "https://editbookpro-d9930-default-rtdb.europe-west1.firebasedatabase.app/"
 }
 
-// firebase
 const app = initializeApp(appSettings)
 const database = getDatabase(app)
 const projectsInDB = ref(database, "projects")
+export const appAddedProjectsInDB = ref(database, "appAddedProjects")
 
+
+if (projectsListEl) {
 onValue(projectsInDB, function(snapshot) {
-    clearProjectListEl()
+    clearListEl(projectsListEl)
     if (!snapshot.exists()) {
         return
     }
-    addProjectsToListEl(Object.values(snapshot.val()))
-}) 
+    addProjectsToListEl(Object.values(snapshot.val()), projectsListEl)
+})
+}
 
+if (appAddedProjectsListEl) {
+    onValue(appAddedProjectsInDB, function(snapshot) {
+        clearListEl(appAddedProjectsListEl)
+        if (!snapshot.exists()) {
+            return
+        }
+        addProjectsToListEl(Object.values(snapshot.val()), appAddedProjectsListEl)
+    })
+}
 
-// HTML elements
-const projnameInputEl = document.getElementById("projname-input")
-const addBtn = document.getElementById("add-btn")
-const projectsListEl = document.getElementById("projects-list")
 
 
 // event listeners
-addBtn.addEventListener("click", function() {
-    if (!projnameInputEl.value) {
-        return
-    }
-    addProjectToDB(projnameInputEl.value)
-    clearInputEl()
-})
+if (newProjBtn) {
+    newProjBtn.addEventListener("click", function() {
+        window.location = "/addproject.html"
+    })
+}
+
 
 
 // functions
-function addProjectToDB(projname) {
-    push(projectsInDB, projname)
-}
-
-function clearInputEl() {
-    projnameInputEl.value = ""
-}
-
-function addProjectsToListEl(projnames) {
+function addProjectsToListEl(projObjects, listEl) {
     let strHTML = ""
-    for (let i = 0; i < projnames.length; i++) {
-        let currProjname = projnames[i]
+    for (let i = 0; i < projObjects.length; i++) {
+        let currProjname = projObjects[i].projname
+        // console.log(currProjname)
+        // console.log()
+
         strHTML += `<li>${currProjname}</li>`
     }
-    projectsListEl.innerHTML = strHTML
+    listEl.innerHTML = strHTML
 }
 
-function clearProjectListEl() {
-    projectsListEl.innerHTML = ""
+function clearListEl(listEl) {
+    listEl.innerHTML = ""
 }
 
