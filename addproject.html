@@ -8,15 +8,23 @@
 </head>
 
 <body>
-
-    <div id="container">
+    <div id="container-addproj">
+        <label for="projname-input">Project name</label><br>
         <input id="projname-input" type="text" placeholder="Draft project name">
+        <label for="pub-input">Publisher</label><br>
         <input id="pub-input" type="text" placeholder="Publisher">
+        <label for="pe-input">PE</label><br>
+        <input id="pe-input" type="text" placeholder="PE name (optional)">
+        <label for="fee-input">Fee</label><br>
         <input id="fee-input" type="number" placeholder="Estimated fee">
-        <input id="deadline-input" type="date" placeholder="Estimated deadline">
+        <label for="arrival-input">Estimated arrival</label><br>
         <input id="arrival-input" type="date" placeholder="Expected to arrive">
-        <button id="add-btn">Add</button>
-        <button id="cancel-btn">Cancel</button>
+        <label for="deadline-input">Deadline</label><br>
+        <input id="deadline-input" type="date" placeholder="Estimated deadline">
+        <div class="btn-margin">
+            <button id="add-btn">Add</button>
+            <button id="cancel-btn">Cancel</button>
+        </div>
         <div id="fill-fields-warning" hidden="true">Please fill out all fields</div>
     </div>
 </body>

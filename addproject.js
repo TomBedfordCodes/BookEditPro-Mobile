@@ -1,9 +1,10 @@
-import {appAddedProjectsInDB } from "/index.js"
-import { ref, push } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import {appAddedProjectsInDB} from "/index.js"
+import {ref, push} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
 const addBtn = document.getElementById("add-btn")
 const projnameInputEl = document.getElementById("projname-input")
 const pubInputEl = document.getElementById("pub-input")
+const peInputEl = document.getElementById("pe-input")
 const feeInputEl = document.getElementById("fee-input")
 const deadlineInputEl = document.getElementById("deadline-input")
 const arrivalInputEl = document.getElementById("arrival-input")
@@ -26,9 +27,13 @@ if (addBtn) {
             setTimeout(hideWarning, 3500)
             return
         }
+        if (!peInputEl.value) {
+            peInputEl.value = "None"
+        }
         addProjectToDB(
             projnameInputEl.value,
             pubInputEl.value,
+            peInputEl.value,
             feeInputEl.value,
             deadlineInputEl.value,
             arrivalInputEl.value
@@ -44,6 +49,7 @@ if (cancelBtn) {
 }
 
 
+
 // functions
 function hideWarning() {
     fillFieldsWarningEl.hidden = true
@@ -57,6 +63,7 @@ function showWarning() {
 function addProjectToDB(
     projname,
     pub,
+    pe,
     fee,
     deadline,
     arrival
@@ -64,9 +71,11 @@ function addProjectToDB(
         let projObject = {
             "projname": projname,
             "pub": pub,
+            "pe": pe,
             "fee": fee,
             "deadline": deadline,
-            "arrival": arrival
+            "arrival": arrival,
+            "status": "draft"
         }
         push(appAddedProjectsInDB, projObject)
 }

@@ -1,7 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
-
-
+import {loadProjectDetails} from "/projdetails.js"
 
 
 
@@ -30,7 +29,7 @@ onValue(projectsInDB, function(snapshot) {
     if (!snapshot.exists()) {
         return
     }
-    addProjectsToListEl(Object.values(snapshot.val()), projectsListEl)
+    addProjectsToListEl(Object.entries(snapshot.val()), projectsListEl)
 })
 }
 
@@ -40,7 +39,7 @@ if (appAddedProjectsListEl) {
         if (!snapshot.exists()) {
             return
         }
-        addProjectsToListEl(Object.values(snapshot.val()), appAddedProjectsListEl)
+        addProjectsToListEl(Object.entries(snapshot.val()), appAddedProjectsListEl)
     })
 }
 
@@ -57,15 +56,50 @@ if (newProjBtn) {
 
 // functions
 function addProjectsToListEl(projObjects, listEl) {
-    let strHTML = ""
-    for (let i = 0; i < projObjects.length; i++) {
-        let currProjname = projObjects[i].projname
-        // console.log(currProjname)
-        // console.log()
-
-        strHTML += `<li>${currProjname}</li>`
+    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    let statusColors = {
+        "draft": "#808080",
+        "current": "#ce1d1d",
+        "ready": "#f0781c",
+        "with_authors": "",
+        "done": "",
+        "inv_not_sent": ""
     }
-    listEl.innerHTML = strHTML
+    // let strHTML = ""
+    for (let i = 0; i < projObjects.length; i++) {
+        let currProjID = projObjects[i][0]
+        let currProjObj = projObjects[i][1]
+        
+        // let currProjname = projObjects[i].projname
+
+        // BASED ON OBJECT'S STATUS, CHANGE COLOUR OF <LI>
+        
+        let currPub = currProjObj.pub
+        let currFee = currProjObj.fee
+        // let currArrival = projObjects[i].arrival
+        let currDeadline = currProjObj.deadline
+        let deadlineArr = currDeadline.split("-")
+        let formattedDatestr = `${deadlineArr[2]} ${months[deadlineArr[1] - 1]}`
+        // strHTML += `<li>
+        //     <span>${currPub}</span>
+        //     <span>£${currFee}</span>
+        //     <span>${formattedDatestr}</span>
+        //     </li>`
+        let liEl = document.createElement("li")
+        liEl.innerHTML = `
+            <span>${currPub}</span>
+            <span>£${currFee}</span>
+            <span>${formattedDatestr}</span>`
+        listEl.append(liEl)
+        liEl.style.backgroundColor = statusColors[currProjObj.status]
+        liEl.addEventListener("click", function() {
+            loadProjectDetails(currProjID)
+        })
+    }
+    // <span>${currArrival}</span>
+    // <span>${currProjname}</span>
+
+    // listEl.innerHTML = strHTML
 }
 
 function clearListEl(listEl) {

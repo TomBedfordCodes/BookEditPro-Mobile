@@ -1,7 +1,15 @@
 
 html body {
     max-width: 320px;
-    font-family: sans-serif;
+    font-family: Helvetica, sans-serif;
+    margin: 0
+}
+
+#container-addproj {
+    max-width: 320px;
+    margin-top: 15px;
+    /* display: flex;
+    flex-direction: column; */
 }
 
 #container {
@@ -10,6 +18,11 @@ html body {
     flex-direction: column;
 }
 
+#heading-div{
+    background-color: #b1b1b1;
+    color: white;
+    margin: 10px 0;
+}
 
 h1 {
     user-select: none;
@@ -17,44 +30,71 @@ h1 {
     margin: 10px auto;
 }
 
+
+
 ul {
+    display: block;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
 li {
+    display: flex;
+    justify-content: space-between;
     color: white;
     flex-grow: 1;
-    padding: 10px;
-    background-color: darkslateblue;
-    text-align: center;
+    padding: 10px 0;
+    background-color: #f0781c;
+    text-align: left;
     box-sizing: border-box;
     margin: 10px auto;
     width: 90%;
+    border-radius: 3px;
 }
+
+li span{
+    /* display:table-cell; */
+    text-align:left;
+    padding: 10px 0;
+    margin: 0 15px 0 23px;
+    /* max-width: 40px; */
+    width: 60px;
+}
+
 
 
 input {
     display: block;
     width: 90%;
     box-sizing: border-box;
-    margin: 10px auto;
+    margin: 2px auto 13px auto;
+    /* margin: 0; */
+    height: 40px;
+}
+
+
+label {
+    padding-left: 16px;
 }
 
 
 button {
     display: block;
     width: 90%;
-    padding: 10px;
+    padding: 15px;
     box-sizing: border-box;
-    margin: 10px 0;
     user-select: none;
-    margin: 3px auto;
-    font-family: sans-serif;
+    margin: 8px auto;
+    font-family: Helvetica, sans-serif;
     font-size: 11pt;
+    /* border-radius: 8px; */
+    /* border: 1px solid black; */
 }
 
+.btn-margin {
+    margin-top: 20px;
+}
 
 #fill-fields-warning {
     color: rgb(181, 10, 10);
