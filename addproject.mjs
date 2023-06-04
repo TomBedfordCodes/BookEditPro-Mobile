@@ -1,4 +1,4 @@
-import {appAddedProjectsInDB} from "/index.mjs"
+import {appAddedProjectsInDB} from "./index.mjs"
 import {push} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
 const addBtn = document.getElementById("add-btn")
@@ -82,7 +82,7 @@ function addProjectToDB(
 
 
 function returnToHomepage() {
-    window.location = "index.html"
+    window.location = "./index.html"
 }
 
 
