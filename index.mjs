@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
-// import {loadProjectDetails} from "/projdetails.js"
+import {loadProjectDetails} from "/projdetails.mjs"
 
 
 
@@ -90,9 +90,9 @@ function addProjectsToListEl(projObjects, listEl) {
             // <span>${currProjname}</span>
         listEl.append(liEl)
         liEl.style.backgroundColor = statusColors[currProjObj.status]
-        // liEl.addEventListener("click", function() {
-        //     loadProjectDetails(currProjID)
-        // })
+        liEl.addEventListener("click", function() {
+            loadProjectDetails(currProjID)
+        })
     }
 
 }
