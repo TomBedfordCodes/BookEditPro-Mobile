@@ -1,5 +1,5 @@
 import {appAddedProjectsInDB} from "/index.js"
-import {ref, push} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
+import {push} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
 const addBtn = document.getElementById("add-btn")
 const projnameInputEl = document.getElementById("projname-input")

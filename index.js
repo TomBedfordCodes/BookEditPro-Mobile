@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
-import {loadProjectDetails} from "/projdetails.js"
+// import {loadProjectDetails} from "/projdetails.js"
 
 
 
@@ -80,26 +80,21 @@ function addProjectsToListEl(projObjects, listEl) {
         let currDeadline = currProjObj.deadline
         let deadlineArr = currDeadline.split("-")
         let formattedDatestr = `${deadlineArr[2]} ${months[deadlineArr[1] - 1]}`
-        // strHTML += `<li>
-        //     <span>${currPub}</span>
-        //     <span>£${currFee}</span>
-        //     <span>${formattedDatestr}</span>
-        //     </li>`
+        
         let liEl = document.createElement("li")
         liEl.innerHTML = `
             <span>${currPub}</span>
             <span>£${currFee}</span>
             <span>${formattedDatestr}</span>`
+            // <span>${currArrival}</span>
+            // <span>${currProjname}</span>
         listEl.append(liEl)
         liEl.style.backgroundColor = statusColors[currProjObj.status]
-        liEl.addEventListener("click", function() {
-            loadProjectDetails(currProjID)
-        })
+        // liEl.addEventListener("click", function() {
+        //     loadProjectDetails(currProjID)
+        // })
     }
-    // <span>${currArrival}</span>
-    // <span>${currProjname}</span>
 
-    // listEl.innerHTML = strHTML
 }
 
 function clearListEl(listEl) {
