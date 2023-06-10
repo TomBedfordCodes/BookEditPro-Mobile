@@ -102,8 +102,17 @@ button {
     margin: 8px auto;
     font-family: Helvetica, sans-serif;
     font-size: 12pt;
-    /* border-radius: 8px; */
-    /* border: 1px solid black; */
+    border-radius: 15px;
+    border: 1px solid darkgray;
+}
+
+
+button:hover {
+    background-color: rgb(225, 225, 225);
+}
+
+button:active {
+    background-color: darkgray;
 }
 
 .btn-margin {
