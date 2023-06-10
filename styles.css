@@ -1,19 +1,19 @@
 
 html body {
-    max-width: 320px;
+    min-width: 320px;
     font-family: Helvetica, sans-serif;
     margin: 0
 }
 
 #container-addproj {
-    max-width: 320px;
+    min-width: 320px;
     margin-top: 15px;
     /* display: flex;
     flex-direction: column; */
 }
 
 #container {
-    max-width: 320px;
+    min-width: 320px;
     display: flex;
     flex-direction: column;
 }
