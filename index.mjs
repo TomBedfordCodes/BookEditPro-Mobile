@@ -58,37 +58,35 @@ if (newProjBtn) {
 function addProjectsToListEl(projObjects, listEl) {
     let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     let statusColors = {
-        "draft": "#808080",
+        "done": "",
+        "inv_not_sent": "",
+        "with_authors": "",
         "current": "#ce1d1d",
         "ready": "#f0781c",
-        "with_authors": "",
-        "done": "",
-        "inv_not_sent": ""
+        "draft": "#808080",
     }
-    // let strHTML = ""
+    // sort list of projObjects by date
+    projObjects.sort((a, b) => a[1].deadline.localeCompare(b[1].deadline))
+    // then sort by status
+    let priorityArr = Object.keys(statusColors)
+    projObjects.sort( ( a, b ) => priorityArr.indexOf(a[1].status) - priorityArr.indexOf(b[1].status) )
     for (let i = 0; i < projObjects.length; i++) {
         let currProjID = projObjects[i][0]
         let currProjObj = projObjects[i][1]
-        
-        // let currProjname = projObjects[i].projname
-
-        // BASED ON OBJECT'S STATUS, CHANGE COLOUR OF <LI>
-        
+        // retrieve projObj details
         let currPub = currProjObj.pub
         let currFee = currProjObj.fee
-        // let currArrival = projObjects[i].arrival
         let currDeadline = currProjObj.deadline
         let deadlineArr = currDeadline.split("-")
-        let formattedDatestr = `${deadlineArr[2]} ${months[deadlineArr[1] - 1]}`
-        
+        let formattedDatestr = `${deadlineArr[2]} ${months[deadlineArr[1] - 1]} ${deadlineArr[0].slice(-2)}`
+        // Create list element
         let liEl = document.createElement("li")
         liEl.innerHTML = `
-            <span>${currPub}</span>
-            <span>£${currFee}</span>
-            <span>${formattedDatestr}</span>`
-            // <span>${currArrival}</span>
-            // <span>${currProjname}</span>
+        <span>${currPub}</span>
+        <span>£${currFee}</span>
+        <span>${formattedDatestr}</span>`
         listEl.append(liEl)
+        // Based on object's status, change colour of <li>
         liEl.style.backgroundColor = statusColors[currProjObj.status]
         liEl.addEventListener("click", function() {
             loadProjectDetails(currProjID)
